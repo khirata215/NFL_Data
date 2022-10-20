@@ -16,9 +16,9 @@ def NFL_YearStats(YearBegin, YearEnd = this_yr):
         all_years = pd.DataFrame()
 
         for yr in years:
-            curr_year = Teams(year = str(YearBegin)).dataframes
+            curr_year = Teams(year = str(yr)).dataframes
 
-            curr_year['Season'] = [datetime.strptime(str(YearBegin), '%Y').year] * len(curr_year)
+            curr_year['Season'] = [datetime.strptime(str(yr), '%Y').year] * len(curr_year)
 
             all_years = pd.concat([all_years, curr_year])
     
