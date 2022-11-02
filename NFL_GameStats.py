@@ -24,7 +24,7 @@ def NFL_GameStats(Year = this_yr, Team = 'ALL'):
             ).dataframe.dropna()
 
             # Creating a column with the current team's abbreviation
-            curr_team['TeamID'] = [Team] * len(curr_team)
+            curr_team['TeamID'] = [team] * len(curr_team)
 
             # Creating a column with the season that was queried
             curr_team['Season'] = [datetime.strptime(Year, '%Y').year] * len(curr_team)
