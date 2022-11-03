@@ -56,6 +56,7 @@ def NFL_GameStats(Year = this_yr, Team = 'ALL'):
         ).rename( 
             # Renaming the columns to something prettier
             columns = {
+                'boxscore_index':           'GameID',
                 'datetime':                 'DateTime',
                 'week':                     'Week',
                 'type':                     'GameType',
@@ -92,12 +93,13 @@ def NFL_GameStats(Year = this_yr, Team = 'ALL'):
                 'times_sacked':             'TimesSacked',
                 'yards_lost_from_sacks':    'YardsLostFromSacks'
                 }
-        )
+        ).reset_index()
         
     # Returning the final table sorted by date and getting rid of the duplicated game rows 
     return(
         all_games[
-            ['DateTime',
+            ['GameID',
+            'DateTime',
             'Season',
             'Week',
             'GameType',
@@ -135,6 +137,6 @@ def NFL_GameStats(Year = this_yr, Team = 'ALL'):
             'TimesSacked',
             'YardsLostFromSacks']
         ].sort_values(
-            by = 'DateTime'
+            by = 'GameID'
         )
     )
