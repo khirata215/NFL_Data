@@ -3,10 +3,8 @@ def NFL_BettingInfo(Years = [2022], ToPickle = False, PickleFileLocation = './NF
     import pandas as pd
     import numpy as np
 
-    #   Importing schedule data, keeping relevant betting info
     bi = nfl.import_schedules(years = Years)[
-        [
-        'game_id',
+        ['game_id',
         'season',
         'game_type',
         'week',
@@ -29,16 +27,11 @@ def NFL_BettingInfo(Years = [2022], ToPickle = False, PickleFileLocation = './NF
         'under_odds',
         'over_odds']
     ]
-    
-    #   Format column names by capitalizing first letters after underscore
     bi.columns = bi.columns.str.title()
-    #   Get rid of underscore to pascal case column names
     bi.columns = bi.columns.str.replace('_', '')
 
-    #   Exporting to a .pkl file if desired
     if ToPickle == True:
         bi.to_pickle(PickleFileLocation)
     
-    #   Else just returning it locally as a dataframe
     else:
         return(bi)
