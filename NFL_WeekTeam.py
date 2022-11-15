@@ -1,14 +1,14 @@
 # Building weekly team data function
-def NFL_WeeklyTeam(Years = [2022], ToPickle = False, PickleFileLocation = './NFL_WeeklyTeam.pkl'):
+def NFL_WeekTeam(Years = [2022], ToPickle = False, PickleFileLocation = './NFL_WeeklyTeam.pkl'):
     import nfl_data_py as nfl
     import pandas as pd
     import numpy as np
     
     # Import weekly data
-    weekly_df = nfl.import_weekly_data(years = Years)
+    wk = nfl.import_weekly_data(years = Years)
     
     # The data is at the player level, so we need to roll this up to the team level
-    weekly_df = (weekly_df
+    wk = (wk
             .groupby(['recent_team','season','week','season_type'])
                 [   'completions',
                     'attempts',
@@ -109,7 +109,7 @@ def NFL_WeeklyTeam(Years = [2022], ToPickle = False, PickleFileLocation = './NFL
     sch  = pd.concat([sch_away, sch_home])
 
     #   Take the team stats, left joining the game info
-    final_df = (weekly_df
+    final_df = (wk
             .merge(
                 sch, 
                 how = 'left', 
