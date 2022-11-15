@@ -5,15 +5,17 @@ def NFL_GameScores(Years = [2022], ToPickle = False, PickleFileLocation = './NFL
 
     #   Importing schedule, only keeping relevant score data
     gs = nfl.import_schedules(years = Years)[
+        [
         'game_id',
         'season',
         'game_type',
         'week',
         'gameday',
         'away_team',
-        'away_score'
+        'away_score',
         'home_team',
         'home_score']
+    ]
     
     #   Format column names by capitalizing first letters after underscore
     gs.columns = gs.columns.str.title()

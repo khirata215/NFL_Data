@@ -5,6 +5,7 @@ def NFL_BettingInfo(Years = [2022], ToPickle = False, PickleFileLocation = './NF
 
     #   Importing schedule data, keeping relevant betting info
     bi = nfl.import_schedules(years = Years)[
+        [
         'game_id',
         'season',
         'game_type',
@@ -13,7 +14,7 @@ def NFL_BettingInfo(Years = [2022], ToPickle = False, PickleFileLocation = './NF
         'weekday',
         'gametime',
         'away_team',
-        'away_score'
+        'away_score',
         'home_team',
         'home_score',
         'location',
@@ -27,6 +28,7 @@ def NFL_BettingInfo(Years = [2022], ToPickle = False, PickleFileLocation = './NF
         'total_line',
         'under_odds',
         'over_odds']
+    ]
     
     #   Format column names by capitalizing first letters after underscore
     bi.columns = bi.columns.str.title()

@@ -6,6 +6,7 @@ def NFL_GameInfo(Years = [2022], ToPickle = False, PickleFileLocation = './NFL_P
 
     # Importing schedule, only keeping relevant game info, scores and betting info will be in another function
     gi = nfl.import_schedules(years = Years)[
+        [
         'game_id',
         'season',
         'game_type',
@@ -38,6 +39,7 @@ def NFL_GameInfo(Years = [2022], ToPickle = False, PickleFileLocation = './NFL_P
         'referee',
         'stadium_id',
         'stadium']
+    ]
     
     #   Format column names by capitalizing first letters after underscore
     gi.columns = gi.columns.str.title()
