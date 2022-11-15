@@ -1,5 +1,5 @@
 # Building play-by-play data function
-def NFL_GameInfo(Years = [2022], ToPickle = False, PickleFileLocation = './NFL_PlayByPlay.pkl'):
+def NFL_GameInfo(Years = [2022], ToPickle = False, PickleFileLocation = './NFL_GameInfo.pkl'):
     import nfl_data_py as nfl
     import pandas as pd
     import numpy as np

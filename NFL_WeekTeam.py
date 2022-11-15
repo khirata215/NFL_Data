@@ -1,5 +1,5 @@
 # Building weekly team data function
-def NFL_WeekTeam(Years = [2022], ToPickle = False, PickleFileLocation = './NFL_WeeklyTeam.pkl'):
+def NFL_WeekTeam(Years = [2022], ToPickle = False, PickleFileLocation = './NFL_WeekTeam.pkl'):
     import nfl_data_py as nfl
     import pandas as pd
     import numpy as np
