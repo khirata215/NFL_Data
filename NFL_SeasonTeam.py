@@ -136,8 +136,8 @@ def NFL_SeasonTeam(Years = [2022], IncludePostseason = False, ToPickle = False, 
     #   Otherwise, we'll only keep regular season rows first before aggregating
     else:    
         tm = (sch
-            .loc[sch['game_type'] == 'REG']
             .assign(scoring_margin = sch.points_scored - sch.points_allowed)
+            .loc[sch['game_type'] == 'REG']
             .groupby(['team', 'season'], sort = 'False')['points_scored','points_allowed','scoring_margin']
             .agg(
                 games_played = ('points_scored', 'count'),
