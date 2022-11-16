@@ -64,7 +64,7 @@ def NFL_SeasonTeam(Years = [2022], IncludePostseason = False, ToPickle = False, 
             )
 
     #   We also want some info on the game, notably things like the final score
-    sch = nfl.import_schedules(years = [2022])
+    sch = nfl.import_schedules(years = Years)
     #   We have a row for each matchup, but if we want a row for each team, the away and home teams need their own rows
     #   Here we take the schedule and rename it so the away team is the focus
     sch_away = (sch
