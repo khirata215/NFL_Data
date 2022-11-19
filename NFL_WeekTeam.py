@@ -122,6 +122,33 @@ def NFL_WeekTeam(Years = [2022], IncludePostseason = False, ToPickle = False, Pi
         ], 
         default = 'POST'
         )
+    sch['team'] = np.select(
+        [
+            sch['team'] == 'STL',
+            sch['team'] == 'OAK',
+            sch['team'] == 'SD',
+        ],
+        [
+            'LA',
+            'LV',
+            'LAC'
+        ],
+        default = sch['team']
+    )
+
+    sch['opponent'] = np.select(
+        [
+            sch['opponent'] == 'STL',
+            sch['opponent'] == 'OAK',
+            sch['opponent'] == 'SD',
+        ],
+        [
+            'LA',
+            'LV',
+            'LAC'
+        ],
+        default = sch['opponent']
+    )
 
     #   Take the team stats, left joining the game info
     final_df = (wk

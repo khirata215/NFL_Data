@@ -125,6 +125,34 @@ def NFL_SeasonTeam(Years = [2022], IncludePostseason = False, ToPickle = False, 
         ], 
         default='POST'
         )
+    sch['team'] = np.select(
+        [
+            sch['team'] == 'STL',
+            sch['team'] == 'OAK',
+            sch['team'] == 'SD',
+        ],
+        [
+            'LA',
+            'LV',
+            'LAC'
+        ],
+        default = sch['team']
+    )
+
+    sch['opponent'] = np.select(
+        [
+            sch['opponent'] == 'STL',
+            sch['opponent'] == 'OAK',
+            sch['opponent'] == 'SD',
+        ],
+        [
+            'LA',
+            'LV',
+            'LAC'
+        ],
+        default = sch['opponent']
+    )
+
     #   Now we have to aggregate the game info data so that it's at the same level as our season/team level data
     #   If postseason is desired, we'll group by and aggregate without filtering
     if IncludePostseason == True:
