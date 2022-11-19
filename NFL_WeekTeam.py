@@ -1,11 +1,17 @@
 # Building weekly team data function
-def NFL_WeekTeam(Years = [2022], ToPickle = False, PickleFileLocation = './NFL_WeekTeam.pkl'):
+def NFL_WeekTeam(Years = [2022], IncludePostseason = False, ToPickle = False, PickleFileLocation = './NFL_WeekTeam.pkl'):
     import nfl_data_py as nfl
     import pandas as pd
     import numpy as np
     
-    # Import weekly data
-    wk = nfl.import_weekly_data(years = Years)
+    #   If postseason rows are desired, just pull in data as is
+    if IncludePostseason == True:
+        wk = nfl.import_weekly_data(years = Years)
+    
+    #   If not, we'll only keep those for the regular season
+    else:
+        wk = nfl.import_weekly_data(years = Years)
+        wk = wk.loc[wk['season_type'] == 'REG']
     
     # The data is at the player level, so we need to roll this up to the team level
     wk = (wk
@@ -107,6 +113,15 @@ def NFL_WeekTeam(Years = [2022], ToPickle = False, PickleFileLocation = './NFL_W
 
     #   Now we stack the home and away tables are combined
     sch  = pd.concat([sch_away, sch_home])
+    sch['game_type'] = np.select(
+        [
+            sch['game_type'] == 'REG', 
+        ], 
+        [
+            'REG', 
+        ], 
+        default = 'POST'
+        )
 
     #   Take the team stats, left joining the game info
     final_df = (wk

@@ -65,6 +65,7 @@ def NFL_SeasonTeam(Years = [2022], IncludePostseason = False, ToPickle = False, 
 
     #   We also want some info on the game, notably things like the final score
     sch = nfl.import_schedules(years = Years)
+
     #   We have a row for each matchup, but if we want a row for each team, the away and home teams need their own rows
     #   Here we take the schedule and rename it so the away team is the focus
     sch_away = (sch
@@ -115,7 +116,15 @@ def NFL_SeasonTeam(Years = [2022], IncludePostseason = False, ToPickle = False, 
         sch_away[sch_away['points_scored'].notna()],
         sch_home[sch_home['points_scored'].notna()]
         ])
-
+    sch['game_type'] = np.select(
+        [
+            sch['game_type'] == 'REG', 
+        ], 
+        [
+            'REG', 
+        ], 
+        default='POST'
+        )
     #   Now we have to aggregate the game info data so that it's at the same level as our season/team level data
     #   If postseason is desired, we'll group by and aggregate without filtering
     if IncludePostseason == True:
